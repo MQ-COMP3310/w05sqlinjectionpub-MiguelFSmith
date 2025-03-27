@@ -56,14 +56,15 @@ public class App {
             String line;
             int i = 1;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                //System.out.println(line);
                 wordleDatabaseConnection.addValidWord(i, line);
+                logger.info("Valid word added from data.txt: " + line);
                 i++;
             }
 
         } catch (IOException e) {
             System.out.println("Not able to load . Sorry!");
-            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, "Database error occurred", e);
             return;
         }
 
@@ -78,8 +79,10 @@ public class App {
 
                 if (wordleDatabaseConnection.isValidWord(guess)) { 
                     System.out.println("Success! It is in the the list.\n");
+                    logger.warning("Invalid word in data.txt: " + line);
                 }else{
                     System.out.println("Sorry. This word is NOT in the the list.\n");
+                    logger.warning("Invalid word in data.txt: " + line);
                 }
 
                 System.out.print("Enter a 4 letter word for a guess or q to quit: " );
