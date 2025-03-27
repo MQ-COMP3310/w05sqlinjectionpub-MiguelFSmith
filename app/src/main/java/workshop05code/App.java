@@ -58,7 +58,6 @@ public class App {
             while ((line = br.readLine()) != null) {
                 //System.out.println(line);
                 wordleDatabaseConnection.addValidWord(i, line);
-                logger.info("Valid word added from data.txt: " + line);
                 i++;
             }
 
@@ -79,10 +78,8 @@ public class App {
 
                 if (wordleDatabaseConnection.isValidWord(guess)) { 
                     System.out.println("Success! It is in the the list.\n");
-                    logger.warning("Invalid word in data.txt: " + line);
                 }else{
                     System.out.println("Sorry. This word is NOT in the the list.\n");
-                    logger.warning("Invalid word in data.txt: " + line);
                 }
 
                 System.out.print("Enter a 4 letter word for a guess or q to quit: " );
