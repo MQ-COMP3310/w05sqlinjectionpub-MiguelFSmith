@@ -10,7 +10,6 @@ import java.io.FileInputStream;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 /**
  *
  * @author sqlitetutorial.net
@@ -38,15 +37,17 @@ public class App {
 
         wordleDatabaseConnection.createNewDatabase("words.db");
         if (wordleDatabaseConnection.checkIfConnectionDefined()) {
-            System.out.println("Wordle created and connected.");
+            logger.info("Database connection established successfully.");
         } else {
             System.out.println("Not able to connect. Sorry!");
+            logger.severe("Failed to establish database connection.");
             return;
         }
         if (wordleDatabaseConnection.createWordleTables()) {
-            System.out.println("Wordle structures in place.");
+            logger.info("Database tables created successfully.");
         } else {
             System.out.println("Not able to launch. Sorry!");
+            logger.severe("Failed to create database table structures.");
             return;
         }
 
@@ -78,8 +79,15 @@ public class App {
 
                 if (wordleDatabaseConnection.isValidWord(guess)) { 
                     System.out.println("Success! It is in the the list.\n");
+                    logger.info(String.format("Correct guess entered by user: %s", guess));
+
+
+
+
                 }else{
                     System.out.println("Sorry. This word is NOT in the the list.\n");
+                    logger.info(String.format("Incorrect guess entered by user: %s", guess));
+
                 }
 
                 System.out.print("Enter a 4 letter word for a guess or q to quit: " );
